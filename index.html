@@ -110,7 +110,7 @@
         let textoCopiado = `${logradouro.value}, ${complemento.value}, ${bairro.value}, ${localidade.value}/${uf.value}`;
         navigator.clipboard.writeText(textoCopiado);
 
-        //textoCopiado.select();
+        textoCopiado.select();
         document.execCommand("copy");
 
         if (logradouro.value === "") {
