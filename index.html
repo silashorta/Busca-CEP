@@ -110,6 +110,10 @@
         let textoCopiado = `${logradouro.value}, ${complemento.value}, ${bairro.value}, ${localidade.value}/${uf.value}`;
         navigator.clipboard.writeText(textoCopiado);
         navigator.clipboard.write(textoCopiado);
+
+        textoCopiado.select();
+        document.execCommand("copy");
+        
         if (logradouro.value === "") {
             console.log(logradouro.value);
             alert(`Não há um endereço válido a ser copiado.`)
