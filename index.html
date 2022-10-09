@@ -15,6 +15,7 @@
         }
         #cabecalho{
             background-color: rgb(254, 255, 174);
+            border-radius: 0.5em;
         }
         #mensagemErro{
             display: none;
@@ -26,45 +27,97 @@
             margin: 0;
             padding: 0.5em;
         }
+        #alertEndereco{
+            display: none;
+            margin: 0;
+            padding: 0.5em;
+        }
 
     </style>
   </head>
   <body class="p-md-5">
-    <main class="container-fluid border">
+    <main class="container-fluid border pb-4">
             <div id="cabecalho" class="d-flex flex-wrap justify-content-around align-items-center mt-3">
                 <img src="busca_cep.png" alt="" width="750px" class="img-fluid">
                 <div><img src="Messenger-pana.svg" class="img-fluid" width="300px"></div>
             </div>
-                <form class="pb-3">
-
-                    <div id="divErro">
-                        <label for="cep" class="form-check-label mt-2">CEP</label>
-                        <input type="text" name="cep" id="cep" placeholder="apenas números." class="form-control" maxlength="8">
-                    </div>
-                    <div id="mensagemErro" class="alert alert-danger" role="alert"></div>
-
-                    <label for="rua" class="form-check-label mt-3">Rua</label>
-                    <input type="text" name="rua" id="logradouro" class="form-control">
-
-                    <label for="rua" class="form-check-label mt-3">Complemento</label>
-                    <input type="text" name="complemento" id="complemento" class="form-control">
-
-                    <label for="bairro" class="form-check-label mt-3">Bairro</label>
-                    <input type="text" name="bairro" id="bairro" class="form-control">
-
-                    <label for="cidade" class="form-check-label mt-3">Cidade</label>
-                    <input type="text" name="cidade" id="localidade" class="form-control">
-
-                    <label for="estado" class="form-check-label mt-3">Estado</label>
-                    <input type="text" name="estado" id="uf" class="form-control">
-
-                    <div id="alerta" class="alert alert-success mt-3" role="alert"></div>
-
-                    <button type="" id="botaoBuscar" class="btn btn-primary mt-3">Pesquisar</button>
-                    <button type="" id="botaoLimpar" class="btn btn-outline-danger mt-3 mx-3">Limpar</button>
-                    <button type="" id="botaoCopiar" class="btn btn-outline-primary mt-3">Copiar</button>
-                </form>
+                <p class="py-3 px-1 text-bg-light lead">Escolha uma das opções abaixo para efetuar a pesquisa.</p>
                 
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                          Busca pelo CEP
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>Preencha o campo CEP para efetuar a pesquisa.</p>
+                            <form class="pb-3">
+
+                                <div id="divErro">
+                                    <label for="cep" class="form-check-label mt-2">CEP</label>
+                                    <input type="text" name="cep" id="cep" placeholder="apenas números" class="form-control" maxlength="8">
+                                </div>
+                                <div id="mensagemErro" class="alert alert-danger" role="alert"></div>
+            
+                                <label for="rua" class="form-check-label mt-3">Rua</label>
+                                <input type="text" name="rua" id="logradouro" class="form-control bg-light" disabled>
+            
+                                <label for="rua" class="form-check-label mt-3">Complemento</label>
+                                <input type="text" name="complemento" id="complemento" class="form-control bg-light" disabled>
+            
+                                <label for="bairro" class="form-check-label mt-3">Bairro</label>
+                                <input type="text" name="bairro" id="bairro" class="form-control bg-light" disabled>
+            
+                                <label for="cidade" class="form-check-label mt-3">Cidade</label>
+                                <input type="text" name="cidade" id="localidade" class="form-control bg-light" disabled>
+            
+                                <label for="estado" class="form-check-label mt-3">Estado</label>
+                                <input type="text" name="estado" id="uf" class="form-control bg-light" disabled>
+            
+                                <div id="alerta" class="alert alert-success mt-3" role="alert"></div>
+            
+                                <button type="" id="botaoBuscar" class="btn btn-primary mt-3">Pesquisar</button>
+                                <button type="" id="botaoLimpar" class="btn btn-outline-danger mt-3 mx-3">Limpar</button>
+                                <button type="" id="botaoCopiar" class="btn btn-outline-primary mt-3">Copiar</button>
+                            </form>
+
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                          Busca pelo Endereço
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div id="accordion" class="accordion-body">
+                            <p>Preencha todos os campos abaixo para efetuar a pesquisa.</p>
+                            <form class="pb-3">
+
+                                <div id="divErro"></div>
+                                <div id="mensagemErro" class="alert alert-danger" role="alert"></div>
+            
+                                <label for="rua" class="form-check-label mt-3">Rua</label>
+                                <input type="text" name="rua" id="lograEndereco" class="form-control">
+        
+                                <label for="cidade" class="form-check-label mt-3">Cidade</label>
+                                <input type="text" name="cidade" id="localEndereco" class="form-control">
+            
+                                <label for="estado" class="form-check-label mt-3">Estado</label>
+                                <input type="text" name="estado" id="ufEndereco" class="form-control">
+            
+                                <div id="alertEndereco" class="alert alert-danger mt-3" role="alert"></div>
+            
+                                <button type="" id="btnBuscaNome" class="btn btn-primary mt-3">Pesquisar</button>
+                                <button type="" id="btnLimpaNome" class="btn btn-outline-danger mt-3 mx-3">Limpar</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -77,6 +130,7 @@
         const localidade = document.querySelector("#localidade");
         const uf = document.querySelector("#uf");
         const alerta = document.querySelector("#alerta");
+        const alertEndereco = document.querySelector("#alertEndereco");
         const btnBuscar =  document.querySelector("#botaoBuscar");
         const btnLimpar =  document.querySelector("#botaoLimpar");
         const btnCopiar = document.querySelector("#botaoCopiar");
@@ -85,20 +139,30 @@
 
         btnBuscar.addEventListener('click', (e) => {
             e.preventDefault(); 
-            try{
-                validaCEP();
-            }catch(erro){
-                mensagemErro.innerHTML = erro.message;
-                logradouro.value = "";
-                complemento.value = "";
-                bairro.value = "";
-                localidade.value = "";
-                uf.value = "";
-            }
+
+                document.addEventListener("keypress", function(e) {
+                    if(e.key === 'Enter') {
+        
+                    btnBuscar.click();
+                    }
+                });
+                try{
+                    validaCEP();
+                }catch(erro){
+                    mensagemErro.innerHTML = erro.message;
+                    logradouro.value = "";
+                    complemento.value = "";
+                    bairro.value = "";
+                    localidade.value = "";
+                    uf.value = "";
+                }
         })
 
-        btnLimpar.addEventListener('click', () => {
+        btnLimpar.addEventListener('click', (e) => {
+            e.preventDefault();
             limpaCampos();
+            mensagemErro.style.display = 'none';
+            alerta.style.display = 'none';
         })
 
         btnCopiar.addEventListener('click', (e) => {
@@ -122,10 +186,13 @@
             //textoCopiado.select();
             document.execCommand("copy");
 
+            alerta.classList.remove("alert-danger");
+            alerta.classList.add("alert-success");
             alerta.style.display = 'block';
             alerta.innerHTML = `O endereço ${textoCopiado} foi copiado com sucesso!`;
 
             if (logradouro.value === "") {
+                alerta.classList.remove("alert-sucess");
                 alerta.classList.add("alert-danger");
                 alerta.innerHTML = `Não há um endereço válido a ser copiado.`
             }
@@ -136,7 +203,9 @@
             if (regex.test(cepbusca.value)){
                 buscaEndereco();
                 mensagemErro.style.display = 'none';
+                alerta.style.display = 'none';
             }else{
+                buscaNome();
                 mensagemErro.style.display = 'block';
                 mensagemErro.classList.add("alert-danger")
                 throw new Error("O CEP informado é inválido!");
@@ -176,6 +245,95 @@
             bairro.value = endereco.bairro;
             localidade.value = endereco.localidade;
             uf.value = endereco.uf;
+        }
+
+        const btnBuscaNome = document.querySelector('#btnBuscaNome')
+        btnBuscaNome.addEventListener('click', (e) => {
+            e.preventDefault();
+            limpaCampos();
+            buscaNome();
+            alertaEnderecos();
+        })
+        const btnLimpaNome = document.querySelector("#btnLimpaNome")
+        btnLimpaNome.addEventListener('click', (e) => {
+            e.preventDefault();
+            lograEndereco.value = "";
+            localEndereco.value = "";
+            ufEndereco.value = ""; 
+            alertEndereco.style.display = "none"
+            document.querySelector('#listaEnderecos').remove()
+            })
+
+        function buscaNome(){
+            const accordion = document.querySelector('#accordion')
+            const listaEnderecos = document.createElement('div')
+            listaEnderecos.setAttribute('id','listaEnderecos')
+            accordion.appendChild(listaEnderecos)
+
+            fetch(`https://viacep.com.br/ws/${ufEndereco.value}/${localEndereco.value}/${lograEndereco.value}/json`)
+            .then((resposta) =>{
+                return resposta.json();
+            })
+            
+            .then((endereco) =>{
+                let enderecos = endereco
+
+                for (let i = 0; i < enderecos.length; i++) {
+                    
+                    const divEnderecos = document.createElement('div')
+                    divEnderecos.classList.add('bg-light','p-2','border','my-2')
+                    listaEnderecos.appendChild(divEnderecos)
+
+                    const cepEnderecos = document.createElement('p')
+                    divEnderecos.appendChild(cepEnderecos)
+                    cepEnderecos.setAttribute('id','cepEnderecos')
+                    cepEnderecos.innerHTML = `CEP: ${enderecos[i].cep}`
+                    
+                    const lograEnderecos = document.createElement('p')
+                    divEnderecos.appendChild(lograEnderecos)
+                    lograEnderecos.setAttribute('id','lograEnderecos')
+                    lograEnderecos.innerHTML = `Rua: ${enderecos[i].logradouro}`
+                    
+                    const compEnderecos = document.createElement('p')
+                    divEnderecos.appendChild(compEnderecos)
+                    compEnderecos.setAttribute('id','compEnderecos')
+                    compEnderecos.innerHTML = `Complemento: ${enderecos[i].complemento}`
+                    
+                    const bairroEnderecos = document.createElement('p')
+                    divEnderecos.appendChild(bairroEnderecos)
+                    bairroEnderecos.setAttribute('id','bairroEnderecos')
+                    bairroEnderecos.innerHTML = `Bairro: ${enderecos[i].bairro}`
+                    
+                    const localEnderecos = document.createElement('p')
+                    divEnderecos.appendChild(localEnderecos)
+                    localEnderecos.setAttribute('id','localEnderecos')
+                    localEnderecos.innerHTML = `Cidade: ${enderecos[i].localidade}`
+                    
+                    const ufEnderecos = document.createElement('p')
+                    divEnderecos.appendChild(ufEnderecos)
+                    ufEnderecos.setAttribute('id','ufEnderecos')
+                    ufEnderecos.innerHTML = `Estado: ${enderecos[i].uf}`
+                    
+                    const btnEnderecos = document.createElement('button')
+                    divEnderecos.appendChild(btnEnderecos)
+                    btnEnderecos.innerHTML = 'Copiar'
+                    btnEnderecos.setAttribute('id','botaoEndereco')
+                    btnEnderecos.setAttribute('onclick','alertaEnderecos()')
+                    btnEnderecos.classList.add('btn','btn-outline-primary')    
+                }
+                
+            })
+        }
+
+        const lograEndereco = document.querySelector("#lograEndereco");
+        const localEndereco = document.querySelector("#localEndereco");
+        const ufEndereco = document.querySelector("#ufEndereco");
+        
+        function alertaEnderecos() {
+            if(lograEndereco.value === ""){
+                alertEndereco.style.display = "block"
+                alertEndereco.innerHTML = 'Preencha os campos corretamente.'
+            }
         }
     </script>
   </body>
