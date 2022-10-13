@@ -76,7 +76,10 @@
                                 <label for="estado" class="form-check-label mt-3">Estado</label>
                                 <input type="text" name="estado" id="uf" class="form-control bg-light" disabled>
             
-                                <div id="alerta" class="alert alert-success mt-3" role="alert"></div>
+                                <!--<div id="alerta" class="alert alert-success mt-3" role="alert"></div>-->
+                                <div id="alerta" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
             
                                 <button type="" id="botaoBuscar" class="btn btn-primary mt-3">Pesquisar</button>
                                 <button type="" id="botaoLimpar" class="btn btn-outline-danger mt-3 mx-3">Limpar</button>
@@ -101,13 +104,13 @@
                                 <div id="mensagemErro" class="alert alert-danger" role="alert"></div>
             
                                 <label for="rua" class="form-check-label mt-3">Rua</label>
-                                <input type="text" name="rua" id="lograEndereco" class="form-control">
+                                <input type="text" name="rua" id="lograEndereco" class="form-control" required>
         
                                 <label for="cidade" class="form-check-label mt-3">Cidade</label>
-                                <input type="text" name="cidade" id="localEndereco" class="form-control">
+                                <input type="text" name="cidade" id="localEndereco" class="form-control" required>
             
                                 <label for="estado" class="form-check-label mt-3">Estado</label>
-                                <input type="text" name="estado" id="ufEndereco" class="form-control">
+                                <input type="text" name="estado" id="ufEndereco" class="form-control" placeholder="Ex.: RJ" required>
             
                                 <div id="alertEndereco" class="alert alert-danger mt-3" role="alert"></div>
             
@@ -231,8 +234,7 @@
                     bairro.value = "";
                     localidade.value = "";
                     uf.value = "";
-                }
-                
+                }   
             })
             .catch((erro)=>{
                 console.error(erro);
@@ -252,8 +254,8 @@
             e.preventDefault();
             limpaCampos();
             buscaNome();
-            alertaEnderecos();
         })
+
         const btnLimpaNome = document.querySelector("#btnLimpaNome")
         btnLimpaNome.addEventListener('click', (e) => {
             e.preventDefault();
@@ -279,62 +281,84 @@
                 let enderecos = endereco
 
                 for (let i = 0; i < enderecos.length; i++) {
-                    
+                    const ident = [i]
+
                     const divEnderecos = document.createElement('div')
                     divEnderecos.classList.add('bg-light','p-2','border','my-2')
+                    divEnderecos.setAttribute('id',`enderecos` + ident)
                     listaEnderecos.appendChild(divEnderecos)
 
                     const cepEnderecos = document.createElement('p')
                     divEnderecos.appendChild(cepEnderecos)
-                    cepEnderecos.setAttribute('id','cepEnderecos')
+                    cepEnderecos.setAttribute('id','cepEnderecos'+ ident)
                     cepEnderecos.innerHTML = `CEP: ${enderecos[i].cep}`
                     
                     const lograEnderecos = document.createElement('p')
                     divEnderecos.appendChild(lograEnderecos)
-                    lograEnderecos.setAttribute('id','lograEnderecos')
+                    lograEnderecos.setAttribute('id','lograEnderecos'+ ident)
                     lograEnderecos.innerHTML = `Rua: ${enderecos[i].logradouro}`
                     
                     const compEnderecos = document.createElement('p')
                     divEnderecos.appendChild(compEnderecos)
-                    compEnderecos.setAttribute('id','compEnderecos')
+                    compEnderecos.setAttribute('id','compEnderecos'+ ident)
                     compEnderecos.innerHTML = `Complemento: ${enderecos[i].complemento}`
                     
                     const bairroEnderecos = document.createElement('p')
                     divEnderecos.appendChild(bairroEnderecos)
-                    bairroEnderecos.setAttribute('id','bairroEnderecos')
+                    bairroEnderecos.setAttribute('id','bairroEnderecos'+ ident)
                     bairroEnderecos.innerHTML = `Bairro: ${enderecos[i].bairro}`
                     
                     const localEnderecos = document.createElement('p')
                     divEnderecos.appendChild(localEnderecos)
-                    localEnderecos.setAttribute('id','localEnderecos')
+                    localEnderecos.setAttribute('id','localEnderecos'+ ident)
                     localEnderecos.innerHTML = `Cidade: ${enderecos[i].localidade}`
                     
                     const ufEnderecos = document.createElement('p')
                     divEnderecos.appendChild(ufEnderecos)
-                    ufEnderecos.setAttribute('id','ufEnderecos')
+                    ufEnderecos.setAttribute('id','ufEnderecos'+ ident)
                     ufEnderecos.innerHTML = `Estado: ${enderecos[i].uf}`
                     
+                    const endCopiado = `${enderecos[i].cep}, ${enderecos[i].logradouro}, ${enderecos[i].complemento}, ${enderecos[i].bairro}, ${enderecos[i].localidade}/${enderecos[i].uf}`
+
                     const btnEnderecos = document.createElement('button')
                     divEnderecos.appendChild(btnEnderecos)
+                    btnEnderecos.classList.add('btn','btn-outline-primary')  
                     btnEnderecos.innerHTML = 'Copiar'
-                    btnEnderecos.setAttribute('id','botaoEndereco')
-                    btnEnderecos.setAttribute('onclick','alertaEnderecos()')
-                    btnEnderecos.classList.add('btn','btn-outline-primary')    
+                    btnEnderecos.setAttribute('id','btnEndereco' + ident)
+                    btnEnderecos.setAttribute('value',`${endCopiado}`)
+                    
+                    btnEnderecos.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alertEndereco.style.display = 'none'
+                    console.log(endCopiado)
+                    navigator.clipboard.writeText(endCopiado);
+                    document.execCommand("copy");
+                    alertEndereco.style.display = 'block'
+                    })
+
+                    const alertEndereco = document.createElement('div')
+                    alertEndereco.classList.add('alert','alert-success','mt-3')
+                    alertEndereco.style.display = 'none'
+                    alertEndereco.setAttribute('id','alertaEnd' + ident)
+                    alertEndereco.setAttribute('value',`${enderecos[i].cep}, ${enderecos[i].logradouro}, ${enderecos[i].complemento}, ${enderecos[i].bairro}, ${enderecos[i].localidade}/${enderecos[i].uf}`)
+                    divEnderecos.appendChild(alertEndereco)
+                    alertEndereco.innerHTML = `O endereço CEP ${enderecos[i].cep}, ${enderecos[i].logradouro}, ${enderecos[i].complemento}, ${enderecos[i].bairro}, ${enderecos[i].localidade}/${enderecos[i].uf} foi copiado com sucesso.`
+
                 }
-                
             })
         }
+        
+
+        
+        
+
+
+
 
         const lograEndereco = document.querySelector("#lograEndereco");
         const localEndereco = document.querySelector("#localEndereco");
         const ufEndereco = document.querySelector("#ufEndereco");
         
-        function alertaEnderecos() {
-            if(lograEndereco.value === ""){
-                alertEndereco.style.display = "block"
-                alertEndereco.innerHTML = 'Preencha os campos corretamente.'
-            }
-        }
     </script>
   </body>
 </html>
