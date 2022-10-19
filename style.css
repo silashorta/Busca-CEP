@@ -1,0 +1,25 @@
+body { 
+    background-color: #e2e2e2;
+}
+main {
+    background-color: #ffffff;
+}
+#cabecalho{
+    background-color: rgb(254, 255, 174);
+    border-radius: 0.5em;
+}
+#mensagemErro{
+    display: none;
+    margin: 0;
+    padding: 0.5em;
+}
+#alerta{
+    display: none;
+    margin: 0;
+    padding: 0.5em;
+}
+#alertEndereco{
+    display: none;
+    margin: 0;
+    padding: 0.5em;
+}
